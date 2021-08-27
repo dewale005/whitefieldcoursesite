@@ -1,0 +1,96 @@
+{% extends "index.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+<div class="mdk-header-layout js-mdk-header-layout">
+    {% include 'components/dashboard_nav.html' %}
+
+    <!-- Header Layout Content -->
+    <div class="mdk-header-layout__content page-content ">
+
+        <div class="page-section pb-0">
+            <div class="container page__container d-flex flex-column flex-sm-row align-items-sm-center">
+                <div class="flex">
+                    <h1 class="h2 mb-0">Verify Your account</h1>
+                    <p class="text-breadcrumb">Please Check your whatsapp or your email to get verified</p>
+                </div>
+                <p class="d-sm-none"></p>
+                <a href="" class="btn btn-outline-secondary flex-column">
+                    Need Help?
+                    <span class="btn__secondary-text">Contact us</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="page-section">
+            <div class="container page__container">
+                <div class="page-separator">
+                    <div class="page-separator__text">Verify Your account</div>
+                </div>
+                <div class="col-sm-6 p-0">
+                        <form method="POST" novalidate> {% csrf_token %}
+                            {% for hidden_field in form.hidden_fields %}
+                            {{ hidden_field }}
+                            {% endfor %}
+    
+                            {% if form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
+                                <div class="d-flex flex-wrap">
+                                    <div class="mr-8pt">
+                                        <i class="material-icons">info</i>
+                                    </div>
+                                    <div class="flex" style="min-width: 180px">
+                                        <small class="text-100">
+                                            {% for error in form.non_field_errors %}
+                                            {{ error }}
+                                            {% endfor %}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+    
+                            {% for field in form.visible_fields %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                <!-- <label class="text-label" for="password_2">Password:</label> -->
+                                <div class="input-group input-group-merge">
+                                    {% if form.is_bound %}
+                                    {% if field.errors %}
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                    {% else %}
+                                    {% render_field field class="form-control is-valid" %}
+                                    {% endif %}
+                                    {% else %}
+                                    {% render_field field class="form-control" %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Verify Acount</button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- // END Header Layout Content -->
+
+    {% include 'components/footer.html' %}
+</div>
+<!-- // END Header Layout -->
+
+<!-- Drawer -->
+{% include 'components/student_sidenav.html' %}
+
+</div>
+{% endblock %}

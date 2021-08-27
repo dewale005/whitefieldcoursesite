@@ -13,19 +13,34 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django import urls
 from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
 
-from .views import home_page, login_page, register_page
+from user.views import UpdateProfileViews
+
+from . import views 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_page),
-    path('login', login_page, name="login"),
-    path('register', register_page, name="register")
+    path('api-auth/', include('rest_framework.urls')),
+    path('', views.HomePageView.as_view(), name="home"),
+    path('login', views.login_page, name="login"),
+    path('verify', views.verification, name="verification"),
+    path('logout', views.logout, name="logout"),
+    path('courses/', include('course.urls')),
+    path('teachers/', include('teachers.urls')),
+    path('api/', include('api.urls')),
+    path('register', views.RegisterUserView.as_view(), name="register"),
+    path('dashboard/', include('students.urls')),
+    path('profile', UpdateProfileViews.as_view(), name="profile"),
+    path('learn-path', views.dashboard_learnpath, name="learnpath"),
+    path('lesson', views.dashboard_lesson, name="lesson"),
+    path('course', views.dashboard_course, name="course")
 ]
 
 if settings.DEBUG:

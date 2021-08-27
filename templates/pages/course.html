@@ -1,0 +1,100 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="mdk-header-layout js-mdk-header-layout">
+
+    <!-- Header -->
+
+    <div id="header" class="mdk-header js-mdk-header mb-0" data-fixed data-effects="">
+        <div class="mdk-header__content">
+
+            {% include 'components/navbar.html' %}
+
+        </div>
+    </div>
+
+    <!-- // END Header -->
+
+    <!-- Header Layout Content -->
+    <div class="mdk-header-layout__content page-content ">
+
+        <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+            <div class="mdk-drawer-layout__content">
+
+                <div class="page-section">
+                    <div class="container page__container">
+
+                        <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-24pt"
+                            style="white-space: nowrap;">
+                            <small class="flex text-muted text-headings text-uppercase mr-3 mb-2 mb-sm-0">Displaying 4
+                                out of 10 courses</small>
+                            <div class="w-auto ml-sm-auto table d-flex align-items-center mb-2 mb-sm-0">
+                                <small class="text-muted text-headings text-uppercase mr-3 d-none d-sm-block">Sort
+                                    by</small>
+
+                                <a href="#" class="sort desc small text-headings text-uppercase">Newest</a>
+
+                                <a href="#" class="sort small text-headings text-uppercase ml-2">Popularity</a>
+
+                            </div>
+
+                            <a href="#" data-target="#library-drawer" data-toggle="sidebar"
+                                class="btn btn-sm btn-white ml-sm-16pt">
+                                <i class="material-icons icon--left">tune</i> Filters
+                            </a>
+
+                        </div>
+
+                        <div class="page-separator">
+                            <div class="page-separator__text">Popular Courses</div>
+                        </div>
+
+                        <div class="row card-group-row">
+
+                            {% include 'components/course.html' %}
+
+                        </div>
+
+                        <ul class="pagination justify-content-start pagination-xsm m-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true" class="material-icons">chevron_left</span>
+                                    <span>Prev</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Page 1">
+                                    <span>1</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Page 2">
+                                    <span>2</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span>Next</span>
+                                    <span aria-hidden="true" class="material-icons">chevron_right</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- // END Header Layout Content -->
+
+    {% include 'components/footer.html' %}
+
+</div>
+
+{% endblock %}
